@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inflation Rate Calculator</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f3f4f6;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #555;
+      text-align: left;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Inflation Rate Calculator</h2>
+
+    <label for="presentValue">Present Value (in Rupees):</label>
+    <input type="number" id="presentValue" placeholder="Enter present value">
+
+    <label for="inflationRate">Inflation Rate (%):</label>
+    <input type="number" id="inflationRate" placeholder="Enter inflation rate">
+
+    <label for="years">Number of Years:</label>
+    <input type="number" id="years" placeholder="Enter number of years">
+
+    <button onclick="calculateFutureValue()">Calculate Future Value</button>
+
+    <p id="result"></p>
+  </div>
+
+  <script>
+    function calculateFutureValue() {
+      var presentValue = parseFloat(document.getElementById("presentValue").value);
+      var inflationRate = parseFloat(document.getElementById("inflationRate").value) / 100; // convert percentage to decimal
+      var years = parseInt(document.getElementById("years").value);
+
+      if (isNaN(presentValue) || isNaN(inflationRate) || isNaN(years) || presentValue <= 0 || inflationRate < 0 || years <= 0) {
+        document.getElementById("result").innerHTML = "Please enter valid inputs.";
+        return;
+      }
+
+      var futureValue = presentValue / Math.pow(1 + inflationRate, years);
+
+      document.getElementById("result").innerHTML = "Future Value after " + years + " years: " + futureValue.toFixed(2) + " Rupees";
+    }
+  </script>
+
+</body>
+</html>
